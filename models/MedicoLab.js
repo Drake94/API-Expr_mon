@@ -4,6 +4,7 @@
 
 const mongoose = require('mongoose')
 const { appConfig } = require('../config') 
+const bcrypt = require('bcryptjs')
 //Describe las estructura de la propiedades de un formato Json 
 const Schema = mongoose.Schema
 
@@ -18,6 +19,11 @@ const MedicoLabSchema = Schema({
 },{
     timestamps: true
 })
+
+MedicoLabSchema.methods.encryptPassword = clave =>{
+
+
+}
 
 MedicoLabSchema.methods.setImgUrl = function setImgUrl (filename) {
     const { host, port } = appConfig
