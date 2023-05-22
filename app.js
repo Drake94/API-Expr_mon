@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 app.use('/public', express.static(`${__dirname}/storage/imgs`))
 
-app.use('/v1', pacienteRoutes)
-app.use('/v2', medicoLabRoutes)
+app.use('/admin', pacienteRoutes)
+app.use('/admin', medicoLabRoutes)
 
 module.exports = app

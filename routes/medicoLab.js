@@ -1,6 +1,6 @@
 //Diego Ortega
 //17/05/2023
-//diegoo@acl.cl
+//dortega@acl.cl
 
 const express = require('express')
 const upload = require('../libs/storage')

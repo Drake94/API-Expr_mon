@@ -1,6 +1,6 @@
 //Diego Ortega
 //17/05/2023
-//diegoo@acl.cl
+//dortega@acl.cl
 
 const mongoose = require('mongoose')
 const { appConfig } = require('../config') 
@@ -20,8 +20,14 @@ const MedicoLabSchema = Schema({
     timestamps: true
 })
 
-MedicoLabSchema.methods.encryptPassword = clave =>{
+MedicoLabSchema.methods.encrypPassword = async clave =>{
+    const salt = await bcrypt.genSalt(10)
+    return await bcrypt.hash(clave, salt)
 
+}
+
+MedicoLabSchema.methods.matchPassword = async function(clave) {
+    return await bcrypt.compare(clave, this.clave)
 
 }
 

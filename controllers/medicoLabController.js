@@ -1,6 +1,6 @@
 //Diego Ortega
 //17/05/2023
-//diegoo@acl.cl
+//dortega@acl.cl
 
 const MedicoLab = require('../models/MedicoLab')
 
