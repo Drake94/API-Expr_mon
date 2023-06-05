@@ -1,7 +1,6 @@
 //Diego Ortega
 //17/05/2023
 //dortega@acl.cl
-
 const mongoose = require('mongoose')
 const { appConfig } = require('../config') 
 const bcrypt = require('bcryptjs')
@@ -9,15 +8,37 @@ const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema
 
 const MedicoLabSchema = Schema({
-    nombre: String,
-    cargo: String,
-    correo: String,
-    clave: String,
-    rut: String,
-    imgUrl: String
-
-},{
-    timestamps: true
+    nombre: {
+        type: String,
+        required: true
+    },
+    cargo: {
+        type: String,
+        required: true
+    },
+    correo: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    clave: {
+        type: String,
+        required: true
+    },
+    rut: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    imgUrl: {
+        type: String,
+        required: true
+    },
+    publicId: {
+        type: String,
+        required: true,
+    },
+    
 })
 
 MedicoLabSchema.methods.encrypPassword = async clave =>{
