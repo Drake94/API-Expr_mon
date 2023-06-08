@@ -40,15 +40,15 @@ const MedicoLabSchema = Schema({
     },
     
 })
-
-MedicoLabSchema.methods.encrypPassword = async clave =>{
+//Encripta la contraseña
+MedicoLabSchema.methods.encryptPassword = async clave =>{
     const salt = await bcrypt.genSalt(10)
     return await bcrypt.hash(clave, salt)
 
 }
-
-MedicoLabSchema.methods.matchPassword = async function(clave) {
-    return await bcrypt.compare(clave, this.clave)
+//Compara y desencripta la contraseña
+MedicoLabSchema.statics.matchPassword = async (clave,receivedClave) => {
+    return await bcrypt.compare(clave, receivedClave)
 
 }
 

@@ -45,9 +45,17 @@ async function getResultadoByRut (req, res) {
 
 }
 
+
+async function updateResultadoById (req, res) {
+    const updateResultado = await Resultado.findByIdAndUpdate( req.params._id, req.body,{
+        new: true
+    })
+    res.status(204).send({updateResultado})
+}
+
 async function deleteResultado (req, res) {
     
-    await Resultado.deleteOne({rut: req.params.rut}).lean()
+    await Resultado.deleteOne({_id: req.params._id}).lean()
     
     res.send("eliminando")
     
@@ -59,5 +67,6 @@ module.exports = {
     addResultado,
     getResultado,
     getResultadoByRut,
-    deleteResultado
+    deleteResultado,
+    updateResultadoById
 }

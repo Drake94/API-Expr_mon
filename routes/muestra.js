@@ -5,9 +5,9 @@
 const express = require('express')
 const { addMuestra, getMuestra, getMuestraByRut } = require('../controllers/muestraController')
 const api = express.Router()
+const { verifyToken, isTens } = require('../libs')
 
-
-api.post('/muestra', addMuestra)
+api.post('/muestra',verifyToken, isTens, addMuestra)
 
 api.get('/muestra', getMuestra)
 

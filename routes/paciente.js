@@ -5,15 +5,16 @@
 const express = require('express')
 const { addPaciente, getPaciente, getPacienteByRut,deletePaciente } = require('../controllers/pacienteController')
 const api = express.Router()
+const { verifyToken } = require('../libs')
 
 
-api.post('/paciente', addPaciente)
+api.post('/paciente', verifyToken, addPaciente)
 
 api.get('/paciente', getPaciente)
 
 api.get('/paciente/:rut', getPacienteByRut)
 
-api.delete('/paciente/:rut', deletePaciente)
+api.delete('/paciente/:rut', verifyToken, deletePaciente)
 
 
 module.exports = api

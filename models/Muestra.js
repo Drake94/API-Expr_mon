@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 //Describe las estructura de la propiedades de un formato Json 
 const Schema = mongoose.Schema
 
+
 const sampleSchema = Schema({ 
     sampleType: {
         type: String,
@@ -15,8 +16,8 @@ const sampleSchema = Schema({
         required: true
     },
     rutPatient: {
-        type: String,
-        unique: true,
+        ref: "Pacientes",
+        type: Schema.Types.String,
         required: true
     },
     status: {

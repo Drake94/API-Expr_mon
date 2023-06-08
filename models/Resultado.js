@@ -19,8 +19,8 @@ const resultSchema = Schema({
         required: true
     },
     rutPatient: {
-        type: String,
-        unique: true,
+        ref: "Pacientes",
+        type: Schema.Types.String,
         required: true
     },
     status: {
