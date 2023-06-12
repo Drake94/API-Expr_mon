@@ -27,7 +27,7 @@ const verifyToken= async(req,res, next) => {
 const isMedic = async (req, res, next)=>{
     const user = await MedicoLab.findById(req.medicoLabId)
     const cargo = user.cargo
-    if (cargo === "Medic" || cargo === "Tecnologo"){
+    if (cargo === "Medico" || cargo === "Tecnologo"){
         next();
         return;
     }
