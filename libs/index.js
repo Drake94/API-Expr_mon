@@ -1,6 +1,7 @@
-const { verifyToken, isMedic, isTens } = require("./authJwt");
+const { verifyToken, isMedic, isTens, isAdmin } = require("./authJwt");
 
 
 module.exports= {verifyToken, 
     isMedic, 
-    isTens}
+    isTens,
+    isAdmin}

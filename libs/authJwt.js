@@ -27,21 +27,30 @@ const verifyToken= async(req,res, next) => {
 const isMedic = async (req, res, next)=>{
     const user = await MedicoLab.findById(req.medicoLabId)
     const cargo = user.cargo
-    if (cargo === "Medico" || cargo === "Tecnologo"){
+    if (cargo === "Médico" || cargo === "Tecnólogo"){
         next();
         return;
     }
-    return res.status(403).send("Se requiere cargo Tens");
+    return res.status(403).send("Se requiere cargo Médico o Tecnólogo");
 }
 
 const isTens = async (req, res, next)=>{
     const user = await MedicoLab.findById(req.medicoLabId)
     const cargo = user.cargo
-    if (cargo === "Tens" || cargo === "Tecnologo"){
+    if (cargo === "Tens" || cargo === "Tecnólogo"){
         next();
         return;
     }
-    return res.status(403).send("Se requiere cargo Tens");
+    return res.status(403).send("Se requiere cargo Tens o Tecnólogo");
+}
+const isAdmin = async (req, res, next)=>{
+    const user = await MedicoLab.findById(req.medicoLabId)
+    const cargo = user.cargo
+    if (cargo === "Administrador"){
+        next();
+        return;
+    }
+    return res.status(403).send("Acceso denegado, Solo Administradores");
 }
 
-module.exports= {verifyToken, isMedic, isTens}
+module.exports= {verifyToken, isMedic, isTens, isAdmin}

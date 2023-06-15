@@ -1,0 +1,15 @@
+//Diego Ortega
+//09/06/2023
+//dortega@acl.cl
+const mongoose = require('mongoose')
+//Describe las estructura de la propiedades de un formato Json 
+const Schema = mongoose.Schema
+
+const StatusSampleSchema = Schema({
+    name: {
+        type: String,
+        required: true
+    }
+})
+
+module.exports = mongoose.model('statussample', StatusSampleSchema)

@@ -8,7 +8,8 @@ const Schema = mongoose.Schema
 
 const sampleSchema = Schema({ 
     sampleType: {
-        type: String,
+        ref: "tipomuestras",
+        type: Schema.Types.String,
         required: true
     },
     description: {
@@ -16,12 +17,13 @@ const sampleSchema = Schema({
         required: true
     },
     rutPatient: {
-        ref: "Pacientes",
+        ref: "pacientes",
         type: Schema.Types.String,
         required: true
     },
     status: {
-        type: String,
+        ref: "status",
+        type: Schema.Types.String,
         required: true
     },
 },{

@@ -30,16 +30,9 @@ async function getTipoMuestra (req, res) {
     const tipoMuestra = await TipoMuestra.find().lean().exec()
     res.status(200).send({ tipoMuestra })
 }
-/*
-async function gettipomuestraById (req, res) {
-    const tipomuestrafound = await Tipomuestra.find({rut: req.params.rut }).lean().exec()
-    res.status(200).send({ tipomuestrafound })
 
-}
-*/
 
 module.exports = {
     addTipoMuestra,
-    getTipoMuestra,
-    //gettipomuestraById
+    getTipoMuestra
 }

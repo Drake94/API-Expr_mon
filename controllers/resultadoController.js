@@ -1,7 +1,7 @@
 //Diego Ortega
 //23/05/2023
 //dortega@acl.cl
-
+            
 const Resultado = require('../models/Resultado')
 
 async function addResultado (req, res){
@@ -31,15 +31,13 @@ async function addResultado (req, res){
 }
 
 async function getResultado (req, res) {
-    /*find()= consulta. lean()=convertir a objetos planos de JS. 
-    exec() ejecuta la consulta para dar cumplimiento a la promesa*/
+
     const resultado = await Resultado.find().lean().exec()
     res.status(200).send({ resultado })
 }
 
 async function getResultadoByRut (req, res) {
-    /*find()= consulta. lean()=convertir a objetos planos de JS. 
-    exec() ejecuta la consulta para dar cumplimiento a la promesa*/
+
     const resultadofound = await Resultado.find({rut: req.params.rut }).lean().exec()
     res.status(200).send({ resultadofound })
 

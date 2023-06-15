@@ -10,6 +10,8 @@ const medicoLabRoutes = require('./routes/medicoLab')
 const resultadoRoutes = require('./routes/resultado')
 const muestraRoutes = require('./routes/muestra')
 const tipoMuestraRoutes = require('./routes/tipoMuestra')
+const cargoRoutes = require('./routes/cargo')
+const statusRoutes = require('./routes/statusSample')
 const session = require('express-session')
 const passport = require('passport')
 
@@ -34,5 +36,7 @@ app.use('/admin', medicoLabRoutes)
 app.use('/admin', resultadoRoutes)
 app.use('/admin', muestraRoutes)
 app.use('/admin', tipoMuestraRoutes)
+app.use('/admin', cargoRoutes)
+app.use('/admin', statusRoutes)
 
 module.exports = app

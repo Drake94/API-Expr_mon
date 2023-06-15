@@ -15,21 +15,32 @@ async function addMedicoLab (req, res){
         cargo,
         correo,
         clave,
+        confirmarClave,
         rut,
         imgUrl,
         publicId
-    } = req.body;
-    if(!req.file){
-        return res.status(204).send('Por favor seleccione una imagen')
-    }
-        
-        const cloudinary_image = await cloudinary.uploader.upload(req.file.path,{
-            folder: 'imagesSarm'
-        })
+        } = req.body;
+
+        if(confirmarClave != clave){
+            return res.status(400).send('Las claves no son iguales')
+        }
+
+        if(!req.file){
+            return res.status(204).send('Por favor seleccione una imagen')
+        }
+
+        if(clave.length <= 4){
+            return res.status(400).send('Clave demasiado corta, mínimo 4 caracteres') 
+        }else if(clave.length >= 20){
+            return res.status(400).send('Clave demasiado larga, Maximo 20 caracteres') 
+        }
+
+        const cloudinary_image = await cloudinary.uploader.upload(req.file.path,{folder: 'imagesSarm'})
         const {secure_url, public_id} = cloudinary_image;
+    
         MedicoLab.findOne({ rut }).then((mediclab) => { 
             if (mediclab){
-                return res.status(400).send('rut en uso')
+                return res.status(400).send('Rut en uso')
             }else{
                 MedicoLab.findOne({ correo }).then(async (mediclab) => { 
                     if (mediclab){
@@ -53,14 +64,15 @@ async function addMedicoLab (req, res){
                             rut,
                             imgUrl: secure_url,
                             publicId: public_id
-                            })
-                            medicoLab.clave = await medicoLab.encryptPassword(clave)
-                            const medicoLabStored = await medicoLab.save()
+                        })
+                        medicoLab.clave = await medicoLab.encryptPassword(clave)
+                        const medicoLabStored = await medicoLab.save()
                     
-                            const token = jwt.sign({_id: medicoLabStored._id}, userLogin.secret, {
-                                expiresIn:31536000
-                            })
-                            res.status(201).send({ medicoLabStored,token})
+                        const token = jwt.sign({_id: medicoLabStored._id}, userLogin.secret, {
+                            expiresIn:31536000
+                        })
+
+                        res.status(201).send({ medicoLabStored,token})
                     }})    
             }
         })

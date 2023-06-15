@@ -11,7 +11,8 @@ const resultSchema = Schema({
         required: true
     },   
     sampleType: {
-        type: String,
+        ref: "tipomuestras",
+        type: Schema.Types.String,
         required: true
     },
     validation: {
@@ -19,12 +20,13 @@ const resultSchema = Schema({
         required: true
     },
     rutPatient: {
-        ref: "Pacientes",
+        ref: "pacientes",
         type: Schema.Types.String,
         required: true
     },
     status: {
-        type: String,
+        ref: "statussamples",
+        type: Schema.Types.String,
         required: true
     },
 },{

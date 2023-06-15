@@ -4,21 +4,21 @@
 
 const express = require('express')
 const upload = require('../libs/multer')
-const { addMedicoLab, getMedicoLab, getMedicoLabByRut, deleteMedicoLab, medicoLogin } = require('../controllers/medicoLabController')
+const medicAs  = require('../controllers/medicoLabController')
 const api = express.Router()
 
 
-api.post('/medicoLab', upload.single('image'), addMedicoLab)
+api.post('/medicoLab', upload.single('image'), medicAs.addMedicoLab)
 
-api.get('/medicoLab', getMedicoLab)
+api.get('/medicoLab', medicAs.getMedicoLab)
 
-api.get('/medicoLab/:rut', getMedicoLabByRut)
+api.get('/medicoLab/:rut', medicAs.getMedicoLabByRut)
 
-api.post('/medicoLabLogIn', medicoLogin)
+api.post('/medicoLabLogIn', medicAs.medicoLogin)
 
 //api.put('/medicoLab', upload.single('image'), addMedicoLab)
 
-api.delete('/medicoLab/:rut', deleteMedicoLab)
+api.delete('/medicoLab/:rut', medicAs.deleteMedicoLab)
 
 
 module.exports = api
