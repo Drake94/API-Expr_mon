@@ -31,7 +31,7 @@ async function addMedicoLab (req, res){
 
         if(clave.length <= 4){
             return res.status(400).send('Clave demasiado corta, mínimo 4 caracteres') 
-        }else if(clave.length >= 20){
+        }else if(clave.length >= 21){
             return res.status(400).send('Clave demasiado larga, Maximo 20 caracteres') 
         }
 
@@ -98,6 +98,13 @@ async function getMedicoLabByRut (req, res) {
 
 }
 
+async function updateMedicoLabById (req, res) {
+    const updateResultado = await MedicoLab.findByIdAndUpdate( req.params._id, req.body,{
+        new: true
+    })
+    res.status(200).send({updateResultado})
+}
+
 async function deleteMedicoLab (req, res) {
     
     await MedicoLab.deleteOne({rut: req.params.rut}).lean()
@@ -128,5 +135,6 @@ module.exports = {
     getMedicoLab,
     getMedicoLabByRut,
     deleteMedicoLab,
-    medicoLogin
+    medicoLogin,
+    updateMedicoLabById
 }

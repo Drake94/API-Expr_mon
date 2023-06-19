@@ -6,14 +6,34 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const pacienteRoutes = require('./routes/paciente')
 const cors = require('cors')
-const medicoLabRoutes = require('./routes/medicoLab')
-const resultadoRoutes = require('./routes/resultado')
-const muestraRoutes = require('./routes/muestra')
-const tipoMuestraRoutes = require('./routes/tipoMuestra')
-const cargoRoutes = require('./routes/cargo')
-const statusRoutes = require('./routes/statusSample')
-const session = require('express-session')
-const passport = require('passport')
+const medicoLabRoutes = require('./routes/medicoLab');
+const resultadoRoutes = require('./routes/resultado');
+const muestraRoutes = require('./routes/muestra');
+const tipoMuestraRoutes = require('./routes/tipoMuestra');
+const cargoRoutes = require('./routes/cargo');
+const statusRoutes = require('./routes/statusSample');
+const session = require('express-session');
+const path = require('path')
+
+
+//swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerSpec = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "CrudExMon API",
+            version: "1.0.0"
+        },
+        servers: [
+            {
+                url: "http://localhost:8081"
+            }
+        ]
+    },
+    apis: [`${path.join(__dirname, "./routes/*.js")}`],
+};
 
 const app = express();
 require('./libs/passport')
@@ -26,8 +46,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
+app.use("/admin-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
 app.use('/public', express.static(`${__dirname}/storage/imgs`))
 

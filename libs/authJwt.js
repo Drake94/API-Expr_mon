@@ -27,7 +27,7 @@ const verifyToken= async(req,res, next) => {
 const isMedic = async (req, res, next)=>{
     const user = await MedicoLab.findById(req.medicoLabId)
     const cargo = user.cargo
-    if (cargo === "Médico" || cargo === "Tecnólogo"){
+    if (cargo === "Médico" || cargo === "Tecnólogo"|| cargo === "TECNÓLOGO" || cargo === "MÉDICO"){
         next();
         return;
     }
@@ -37,7 +37,7 @@ const isMedic = async (req, res, next)=>{
 const isTens = async (req, res, next)=>{
     const user = await MedicoLab.findById(req.medicoLabId)
     const cargo = user.cargo
-    if (cargo === "Tens" || cargo === "Tecnólogo"){
+    if (cargo === "Tens" || cargo === "Tecnólogo" || cargo === "TENS" || cargo === "TECNÓLOGO"){
         next();
         return;
     }
@@ -46,7 +46,8 @@ const isTens = async (req, res, next)=>{
 const isAdmin = async (req, res, next)=>{
     const user = await MedicoLab.findById(req.medicoLabId)
     const cargo = user.cargo
-    if (cargo === "Administrador"){
+    console.log(cargo)
+    if (cargo === "Administrador" || cargo === "ADMINISTRADOR"){
         next();
         return;
     }
