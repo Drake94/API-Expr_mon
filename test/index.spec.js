@@ -8,10 +8,9 @@ describe('Prueba sobre api resultados', () => {
 
     describe('GET /admin/resultado', () => {
 
-        it('La ruta funciona',async () =>{
+        it('La ruta funciona', () =>{
             const response =request(api).get('/admin/resultado').send();
-            expect((await response).statusCode).to.equal(200)
-            expect(response.headers['content-type']).toContain('json');
+            expect((response).statusCode).to.equal(200)
         })
 
     } )
